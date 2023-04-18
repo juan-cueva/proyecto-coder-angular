@@ -5,13 +5,15 @@ import { AppComponent } from './app.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { StudentsComponent } from './students/students.component';
+import { CursoPipe } from './pipes/curso.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     ToolbarComponent,
     NavbarComponent,
-    StudentsComponent
+    StudentsComponent,
+    CursoPipe
   ],
   imports: [
     BrowserModule

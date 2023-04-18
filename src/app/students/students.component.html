@@ -4,27 +4,17 @@
             <th scope="col">Id</th>
             <th scope="col">Nombre</th>
             <th scope="col">Apellido</th>
-            <th scope="col">Curso</th>
+            <th scope="col">Correo</th>
+            <th scope="col">Cursos Finalizados</th>
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Juan</td>
-            <td>Pérez</td>
-            <td>Desarrollo Web</td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Andrés</td>
-            <td>Martínez</td>
-            <td>Angular</td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Camila</td>
-            <td>Gil</td>
-            <td>Javascript</td>
+        <tr *ngFor="let estudiante of estudiantes" [ngClass]="estudiante.estaActivo ? 'activo' : 'inactivo'">
+            <th scope="row">{{ estudiante.id }}</th>
+            <td>{{ estudiante.nombre }}</td>
+            <td>{{ estudiante.apellido }}</td>
+            <td>{{ estudiante.correo }}</td>
+            <td>{{ estudiante.cursosFinalizados | cursoPipe}}</td>
         </tr>
     </tbody>
 </table>
