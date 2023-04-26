@@ -6,6 +6,7 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { StudentsComponent } from './students/students.component';
 import { CursoPipe } from './pipes/curso.pipe';
+import { CreateComponent } from './students/create/create.component';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { CursoPipe } from './pipes/curso.pipe';
     ToolbarComponent,
     NavbarComponent,
     StudentsComponent,
-    CursoPipe
+    CursoPipe,
+    CreateComponent
   ],
   imports: [
     BrowserModule
