@@ -5,17 +5,14 @@
 
 app-toolbar {
     grid-area: toolbar;
-    background-color: antiquewhite;
 }
 
 app-navbar {
     grid-area: navbar;
-    background-color: antiquewhite;
 }
 
 app-students {
     grid-area: students;
-    background-color: antiquewhite;
 }
 
 .main-layout {

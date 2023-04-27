@@ -1,0 +1,84 @@
+<form [formGroup]="formularioCreacion">
+    <div class="d-flex justify-content-center">
+        <div class="mb-3 w-50">
+            <label for="exampleFormControlInput1" class="form-label">Nombre</label>
+            <input type="text" class="form-control" formControlName="nombre"
+                [ngClass]="{'is-invalid': formularioCreacion.get('nombre')?.invalid && formularioCreacion.get('nombre')?.dirty}"
+                required>
+            <div *ngIf="formularioCreacion.get('nombre')?.invalid && formularioCreacion.get('nombre')?.dirty"
+                class="invalid-feedback">
+                {{formularioCreacion.get('nombre')?.getError('required') ? 'Ingrese el nombre del estudiante' : 'Ingrese
+                carácteres válidos [a-z, A-Z]'}}
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center">
+        <div class="mb-3 w-50">
+            <label for="exampleFormControlInput1" class="form-label">Apellido</label>
+            <input type="text" class="form-control" formControlName="apellido"
+                [ngClass]="{'is-invalid': formularioCreacion.get('apellido')?.invalid && formularioCreacion.get('apellido')?.dirty}"
+                required>
+            <div *ngIf="formularioCreacion.get('apellido')?.invalid && formularioCreacion.get('apellido')?.dirty"
+                class="invalid-feedback">
+                {{formularioCreacion.get('apellido')?.getError('required') ? 'Ingrese el apellido del estudiante' :
+                'Ingrese carácteres válidos [a-z, A-Z]'}}
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center">
+        <div class="mb-3 w-50">
+            <label for="exampleFormControlInput1" class="form-label">Edad</label>
+            <input type="number" class="form-control" formControlName="edad"
+                [ngClass]="{'is-invalid': formularioCreacion.get('edad')?.invalid && formularioCreacion.get('edad')?.dirty}"
+                required>
+            <div *ngIf="formularioCreacion.get('edad')?.invalid && formularioCreacion.get('edad')?.dirty"
+                class="invalid-feedback">
+                {{formularioCreacion.get('edad')?.getError('required') ? 'Ingrese la edad del estudiante' :
+                'Ingrese carácteres válidos [0-9]'}}
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center">
+        <div class="mb-3 w-50">
+            <label for="exampleFormControlInput1" class="form-label">Correo</label>
+            <input type="email" class="form-control" formControlName="correo"
+                [ngClass]="{'is-invalid': formularioCreacion.get('correo')?.invalid && formularioCreacion.get('correo')?.dirty}"
+                required>
+            <div *ngIf="formularioCreacion.get('correo')?.invalid && formularioCreacion.get('correo')?.dirty"
+                class="invalid-feedback">
+                {{formularioCreacion.get('correo')?.getError('required') ? 'Ingrese el correo del estudiante' :
+                'Ingrese el formato de correo'}}
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-center">
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" formControlName="estaActivo">
+            <label class="form-check-label" for="flexSwitchCheckDefault">Activo</label>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-center mt-3">
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+            <label class="form-check-label" for="inlineCheckbox1">Metodologías Ágiles</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+            <label class="form-check-label" for="inlineCheckbox2">Desarrollo Web</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+            <label class="form-check-label" for="inlineCheckbox2">JavaScript</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+            <label class="form-check-label" for="inlineCheckbox2">Angular</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+            <label class="form-check-label" for="inlineCheckbox2">Programación Backend</label>
+        </div>
+    </div>
+</form>
