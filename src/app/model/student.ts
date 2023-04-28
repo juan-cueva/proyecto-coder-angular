@@ -8,6 +8,7 @@ export class Student {
         public edad: number,
         public correo: string,
         public estaActivo: boolean,
-        public cursosFinalizados: Curso[]
+        public cursosFinalizados: Curso[],
+        public cursando: Curso
     ) {}
 }
