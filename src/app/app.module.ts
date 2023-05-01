@@ -13,6 +13,8 @@ import { RutasModule } from './routes/rutas.module';
 import { TableComponent } from './students/table/table.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './modules/material/material.module';
+import { NombrePipe } from './pipes/nombre.pipe';
+import { EditComponent } from './students/edit/edit.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { MaterialModule } from './modules/material/material.module';
     StudentsComponent,
     CursoPipe,
     CreateComponent,
-    TableComponent
+    TableComponent,
+    NombrePipe,
+    EditComponent
   ],
   imports: [
     BrowserModule,

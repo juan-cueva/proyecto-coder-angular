@@ -54,31 +54,49 @@
 
     <div class="d-flex justify-content-center">
         <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" role="switch" formControlName="estaActivo">
+            <input class="form-check-input" type="checkbox" role="switch" (change)="activar()"
+                formControlName="estaActivo">
             <label class="form-check-label" for="flexSwitchCheckDefault">Activo</label>
         </div>
     </div>
-
-    <div class="d-flex justify-content-center mt-3">
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-            <label class="form-check-label" for="inlineCheckbox1">Metodologías Ágiles</label>
+    <div *ngIf="activo" class="d-flex justify-content-center">
+        <div class="mb-3 w-50">
+            <label for="exampleFormControlInput1" class="form-label">Cursando</label>
+            <select class="form-select" aria-label="Default select example" formControlName="cursando"
+                [ngClass]="{'is-invalid': formularioCreacion.get('cursando')?.invalid && formularioCreacion.get('cursando')?.touched}">
+                <option *ngFor="let curso of cursos" [ngValue]="curso">{{curso.curso}}</option>
+            </select>
+            <div *ngIf="formularioCreacion.get('cursando')?.invalid && formularioCreacion.get('cursando')?.touched"
+                class="invalid-feedback">
+                Seleccione un curso de la lista
+            </div>
         </div>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-            <label class="form-check-label" for="inlineCheckbox2">Desarrollo Web</label>
+    </div>
+    <div class="mt-3 mb-3 p-3 border border-warn rounded-start rounded-end">
+        <div>
+            <p>Cursos Finalizados:</p>
         </div>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-            <label class="form-check-label" for="inlineCheckbox2">JavaScript</label>
+        <div class="d-flex justify-content-center mt-3">
+            <div *ngFor="let curso of cursos; index as i" class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
+                    (change)="guardarCheckbox($event, i)">
+                <label class="form-check-label" for="inlineCheckbox1">{{curso.curso}}</label>
+            </div>
         </div>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-            <label class="form-check-label" for="inlineCheckbox2">Angular</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-            <label class="form-check-label" for="inlineCheckbox2">Programación Backend</label>
-        </div>
+    </div>
+    <div *ngIf="exitoso" class="alert alert-success" role="alert">
+        El estudiante se creó con éxito
+    </div>
+    <div *ngIf="fallido" class="alert alert-danger" role="alert">
+        El estudiante no pudo ser creado
+    </div>
+    <div class="d-flex justify-content-center gap-3">
+        <button type="button" class="btn btn-danger" routerLink="../tabla">
+            Regresar
+        </button>
+        <button type="submit" [disabled]="!formularioCreacion.valid" class="btn btn-success"
+            (click)="crearEstudiante()">
+            Guardar
+        </button>
     </div>
 </form>
