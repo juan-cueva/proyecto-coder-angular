@@ -1,0 +1,7 @@
+.inactivo{
+    background-color: grey !important;
+}
+
+.inactivo:hover {
+    background-color: grey !important;
+}
