@@ -15,7 +15,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './modules/material/material.module';
 import { NombrePipe } from './pipes/nombre.pipe';
 import { EditComponent } from './students/edit/edit.component';
-import { FuenteVeinteDirective } from './directives/fuente-veinte.directive';
+import { FuenteDirective } from './directives/fuente.directive';
 
 @NgModule({
   declarations: [
@@ -27,9 +27,9 @@ import { FuenteVeinteDirective } from './directives/fuente-veinte.directive';
     CreateComponent,
     TableComponent,
     NombrePipe,
-    EditComponent,
-    FuenteVeinteDirective
-  ],
+    EditComponent, 
+    FuenteDirective
+    ],
   imports: [
     BrowserModule,
     FormsModule,
