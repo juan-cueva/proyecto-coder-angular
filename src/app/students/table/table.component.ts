@@ -30,4 +30,13 @@ columnasMostradas: string[] = [];
     let estudianteString = JSON.stringify(estudiante);
     this.router.navigate(['estudiantes/editar'],{queryParams: {estudiante: estudianteString}});        
   }
+
+  botonEliminar(id: string) {
+    this.servicio.deleteEstudiante(id).subscribe(
+      data=> {
+        console.log(data);
+        this.ngOnInit();
+      }
+    )
+  }
 }

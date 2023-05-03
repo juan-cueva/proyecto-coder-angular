@@ -20,7 +20,6 @@ export class EditComponent implements OnInit {
   fallido: boolean = false;
   estudianteString: any;
   estudiante: any;
-  cambiosCursosFinalizados: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -101,11 +100,12 @@ export class EditComponent implements OnInit {
       this.body['cursando'] = []
     }
     this.body['cursosFinalizados'] = this.cursosFinalizados; 
-    this.service.putEstudiante(this.body['id'], this.body).subscribe(
-      (data) => {
-        console.log(data)
-      }
-    )   
+    this.service.putEstudiante(this.body['id'], this.body).subscribe((data) => {
+      this.exitoso = true;
+    }, (error) => {
+      this.fallido = true;
+    });
+    setTimeout(() => this.router.navigate(['estudiantes/tabla']), 1500);
   }
 
 }

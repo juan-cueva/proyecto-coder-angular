@@ -2,7 +2,8 @@
     <div class="d-flex justify-content-center">
         <div class="mb-3 w-50">
             <label for="exampleFormControlInput1" class="form-label">Nombre</label>
-            <input type="text" class="form-control" formControlName="nombre" [placeholder]="estudiante.nombre | nombrePipe"
+            <input type="text" class="form-control" formControlName="nombre"
+                [placeholder]="estudiante.nombre | nombrePipe"
                 [ngClass]="{'is-invalid': formularioCreacion.get('nombre')?.invalid && formularioCreacion.get('nombre')?.dirty}"
                 required>
             <div *ngIf="formularioCreacion.get('nombre')?.invalid && formularioCreacion.get('nombre')?.dirty"
@@ -15,7 +16,8 @@
     <div class="d-flex justify-content-center">
         <div class="mb-3 w-50">
             <label for="exampleFormControlInput1" class="form-label">Apellido</label>
-            <input type="text" class="form-control" formControlName="apellido" [placeholder]="estudiante.apellido | nombrePipe"
+            <input type="text" class="form-control" formControlName="apellido"
+                [placeholder]="estudiante.apellido | nombrePipe"
                 [ngClass]="{'is-invalid': formularioCreacion.get('apellido')?.invalid && formularioCreacion.get('apellido')?.dirty}"
                 required>
             <div *ngIf="formularioCreacion.get('apellido')?.invalid && formularioCreacion.get('apellido')?.dirty"
@@ -84,6 +86,12 @@
                 <label class="form-check-label" for="checkbox+i">{{curso.curso}}</label>
             </div>
         </div>
+    </div>
+    <div *ngIf="exitoso" class="alert alert-success" role="alert">
+        Estudiante creado con éxito
+    </div>
+    <div *ngIf="fallido" class="alert alert-danger" role="alert">
+        Estudiante no pudo se creó
     </div>
     <div *ngIf="exitoso" class="alert alert-success" role="alert">
         Estudiante creado con éxito

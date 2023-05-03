@@ -27,9 +27,10 @@ export class ApiService {
   }
 
   public putEstudiante(id: string, body: Student) {
-    
-    console.log('body', body);
-
     return this.httpClient.put(this.URL_API + 'estudiantes/' + id, body);
+  }
+
+  public deleteEstudiante(id: string) {
+    return this.httpClient.delete(this.URL_API + 'estudiantes/' + id);
   }
 }
