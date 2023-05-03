@@ -78,6 +78,6 @@ export class CreateComponent implements OnInit {
     }, (error) => {
       this.fallido = true;
     });
-    setTimeout(()=> this.router.navigate(['estudiantes/tabla']), 3000)
+    setTimeout(() => this.router.navigate(['estudiantes/tabla']), 2000)
   }
 }

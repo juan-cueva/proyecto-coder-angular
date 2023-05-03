@@ -1,1 +1,102 @@
-<p>edit works!</p>
+<form [formGroup]="formularioCreacion">
+    <div class="d-flex justify-content-center">
+        <div class="mb-3 w-50">
+            <label for="exampleFormControlInput1" class="form-label">Nombre</label>
+            <input type="text" class="form-control" formControlName="nombre" [placeholder]="estudiante.nombre | nombrePipe"
+                [ngClass]="{'is-invalid': formularioCreacion.get('nombre')?.invalid && formularioCreacion.get('nombre')?.dirty}"
+                required>
+            <div *ngIf="formularioCreacion.get('nombre')?.invalid && formularioCreacion.get('nombre')?.dirty"
+                class="invalid-feedback">
+                {{formularioCreacion.get('nombre')?.getError('required') ? 'Ingrese el nombre del estudiante' : 'Ingrese
+                carácteres válidos [a-z, A-Z]'}}
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center">
+        <div class="mb-3 w-50">
+            <label for="exampleFormControlInput1" class="form-label">Apellido</label>
+            <input type="text" class="form-control" formControlName="apellido" [placeholder]="estudiante.apellido | nombrePipe"
+                [ngClass]="{'is-invalid': formularioCreacion.get('apellido')?.invalid && formularioCreacion.get('apellido')?.dirty}"
+                required>
+            <div *ngIf="formularioCreacion.get('apellido')?.invalid && formularioCreacion.get('apellido')?.dirty"
+                class="invalid-feedback">
+                {{formularioCreacion.get('apellido')?.getError('required') ? 'Ingrese el apellido del estudiante' :
+                'Ingrese carácteres válidos [a-z, A-Z]'}}
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center">
+        <div class="mb-3 w-50">
+            <label for="exampleFormControlInput1" class="form-label">Edad</label>
+            <input type="number" class="form-control" formControlName="edad" [placeholder]="estudiante.edad"
+                [ngClass]="{'is-invalid': formularioCreacion.get('edad')?.invalid && formularioCreacion.get('edad')?.dirty}"
+                required>
+            <div *ngIf="formularioCreacion.get('edad')?.invalid && formularioCreacion.get('edad')?.dirty"
+                class="invalid-feedback">
+                {{formularioCreacion.get('edad')?.getError('required') ? 'Ingrese la edad del estudiante' :
+                'Ingrese carácteres válidos [0-9]'}}
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center">
+        <div class="mb-3 w-50">
+            <label for="exampleFormControlInput1" class="form-label">Correo</label>
+            <input type="email" class="form-control" formControlName="correo" [placeholder]="estudiante.correo"
+                [ngClass]="{'is-invalid': formularioCreacion.get('correo')?.invalid && formularioCreacion.get('correo')?.dirty}"
+                required>
+            <div *ngIf="formularioCreacion.get('correo')?.invalid && formularioCreacion.get('correo')?.dirty"
+                class="invalid-feedback">
+                {{formularioCreacion.get('correo')?.getError('required') ? 'Ingrese el correo del estudiante' :
+                'Ingrese el formato de correo'}}
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-center">
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" (change)="activar()"
+                formControlName="estaActivo">
+            <label class="form-check-label" for="flexSwitchCheckDefault">Activo</label>
+        </div>
+    </div>
+    <div *ngIf="activo" class="d-flex justify-content-center">
+        <div class="mb-3 w-50">
+            <label for="exampleFormControlInput1" class="form-label">Cursando</label>
+            <select class="form-select" aria-label="Default select example" formControlName="cursando"
+                [ngClass]="{'is-invalid': formularioCreacion.get('cursando')?.invalid && formularioCreacion.get('cursando')?.touched}">
+                <option value="" hidden>{{estudiante.cursando.curso}}</option>
+                <option *ngFor="let curso of cursos" [ngValue]="curso">{{curso.curso}}</option>
+            </select>
+            <div *ngIf="formularioCreacion.get('cursando')?.invalid && formularioCreacion.get('cursando')?.touched"
+                class="invalid-feedback">
+                Seleccione un curso de la lista
+            </div>
+        </div>
+    </div>
+    <div class="mt-3 mb-3 p-3 border border-warn rounded-start rounded-end">
+        <div>
+            <p>Cursos Finalizados:</p>
+        </div>
+        <div class="d-flex justify-content-center mt-3">
+            <div *ngFor="let curso of cursos; index as i" class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" [checked]="mostrarCursosFinalizados(i)"
+                    (change)="guardarCheckbox($event, i)">
+                <label class="form-check-label" for="checkbox+i">{{curso.curso}}</label>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="exitoso" class="alert alert-success" role="alert">
+        Estudiante creado con éxito
+    </div>
+    <div *ngIf="fallido" class="alert alert-danger" role="alert">
+        Estudiante no pudo se creó
+    </div>
+    <div class="d-flex justify-content-center gap-3">
+        <button type="button" class="btn btn-danger" routerLink="../tabla">
+            Regresar
+        </button>
+        <button type="submit" (click)="editarEstudiante()" class="btn btn-success">
+            Guardar
+        </button>
+    </div>
+</form>

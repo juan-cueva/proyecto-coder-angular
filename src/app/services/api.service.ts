@@ -25,4 +25,11 @@ export class ApiService {
   public postEstudiante(body: Student) {
     return this.httpClient.post(this.URL_API + 'estudiantes', body)
   }
+
+  public putEstudiante(id: string, body: Student) {
+    
+    console.log('body', body);
+
+    return this.httpClient.put(this.URL_API + 'estudiantes/' + id, body);
+  }
 }
