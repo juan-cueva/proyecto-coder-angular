@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, TemplateRef } from '@angular/core';
 import { Student } from 'src/app/model/student';
 import { ApiService } from 'src/app/services/api.service';
 import { Router } from '@angular/router';
+import { BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-table',
@@ -11,9 +12,11 @@ import { Router } from '@angular/router';
 export class TableComponent {
 estudiantes: Student[];
 columnasMostradas: string[] = [];
+estudianteSeleccionado: Student;
   constructor(
     private servicio: ApiService,
-    private router: Router
+    private router: Router,
+    private modalService: BsModalService
   ) {}
 
   ngOnInit(): void {
@@ -38,5 +41,21 @@ columnasMostradas: string[] = [];
         this.ngOnInit();
       }
     )
+  }
+
+  mostrarModal(modal: TemplateRef<any>, estudiante: Student) {
+    this.modalService.show(modal);
+    this.estudianteSeleccionado = estudiante;
+  }
+
+  cerrarModal() {
+    this.modalService.hide();
+  }
+
+  eliminarEstudiante() {
+    this.servicio.deleteEstudiante(String(this.estudianteSeleccionado.id)).subscribe(data=>{
+      this.ngOnInit();
+      this.modalService.hide();
+    });
   }
 }
