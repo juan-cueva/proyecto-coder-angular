@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Curso } from 'src/app/model/curso';
-import { Student } from 'src/app/model/student';
-import { ApiService } from 'src/app/services/api.service';
+import { Curso } from 'src/app/shared/model/curso';
+import { Student } from 'src/app/shared/model/student';
+import { ApiService } from 'src/app/core/core/services/api.service';
 
 @Component({
   selector: 'app-create',

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Curso } from 'src/app/model/curso';
-import { ApiService } from 'src/app/services/api.service';
+import { Curso } from 'src/app/shared/model/curso';
+import { ApiService } from 'src/app/core/core/services/api.service';
 
 @Component({
   selector: 'app-edit',
