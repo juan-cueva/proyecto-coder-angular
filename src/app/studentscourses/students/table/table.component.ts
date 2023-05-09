@@ -26,12 +26,12 @@ estudianteSeleccionado: Student;
         sessionStorage.setItem('id', String(this.estudiantes.length+1))
       }
     );
-    this.columnasMostradas = ['id', 'nombre', 'apellido', 'edad', 'correo', 'cursosFinalizados', 'cursando', 'editar', 'eliminar'];
+    this.columnasMostradas = ['id', 'nombre', 'apellido', 'edad', 'correo', 'editar', 'eliminar'];
   }
 
   botonEditar(estudiante: any){
     let estudianteString = JSON.stringify(estudiante);
-    this.router.navigate(['estudiantes/editar'],{queryParams: {estudiante: estudianteString}});        
+    this.router.navigate(['landing/estudiantes/editar'],{queryParams: {estudiante: estudianteString}});        
   }
 
   botonEliminar(id: string) {

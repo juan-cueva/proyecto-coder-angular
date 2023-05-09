@@ -1,17 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { StudentsComponent } from 'src/app/students/students.component';
+import { LayoutComponent } from '../layout/layout.component';
 import { RutasHijasModule } from './rutas-hijas.module';
+import { LoginComponent } from '../login/login.component';
 
 const rutas: Routes = [
-  { path: 'estudiantes', component: StudentsComponent }
+  { path: '', redirectTo:'/login', pathMatch: 'full'},
+  { path: 'login', component: LoginComponent},
+  { path: 'landing', component: LayoutComponent},
 ]
 
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule, RutasHijasModule, RouterModule.forRoot(rutas)
+    CommonModule, RouterModule.forRoot(rutas), RutasHijasModule
   ],
   exports: [
     RouterModule

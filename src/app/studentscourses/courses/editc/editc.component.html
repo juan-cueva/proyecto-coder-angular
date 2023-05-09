@@ -1,0 +1,71 @@
+<form [formGroup]="formularioCreacion">
+    <div class="d-flex justify-content-center">
+        <div class="mb-3 w-50">
+            <label for="exampleFormControlInput1" class="form-label">Nombre del curso</label>
+            <input type="text" class="form-control" formControlName="curso"
+                [ngClass]="{'is-invalid': formularioCreacion.get('curso')?.invalid && formularioCreacion.get('curso')?.dirty}"
+                [placeholder]="curso.curso" required>
+            <div *ngIf="formularioCreacion.get('curso')?.invalid && formularioCreacion.get('curso')?.dirty"
+                class="invalid-feedback">
+                {{formularioCreacion.get('curso')?.getError('required') ? 'Ingrese el nombre del curso' : 'Ingrese
+                carácteres válidos [a-z, A-Z]'}}
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center">
+        <div class="mb-3 w-50">
+            <label for="exampleFormControlInput1" class="form-label">Capacidad del curso</label>
+            <input type="number" class="form-control" formControlName="capacidad"
+                [ngClass]="{'is-invalid': formularioCreacion.get('capacidad')?.invalid && formularioCreacion.get('capacidad')?.dirty}"
+                [placeholder]="curso.capacidad" required>
+            <div *ngIf="formularioCreacion.get('capacidad')?.invalid && formularioCreacion.get('capacidad')?.dirty"
+                class="invalid-feedback">
+                {{formularioCreacion.get('capacidad')?.getError('required') ? 'Ingrese la capacidad del curso' :
+                'Ingrese carácteres válidos [a-z, A-Z]'}}
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="exitoso" class="alert alert-success" role="alert">
+        {{mensaje}}
+    </div>
+    <div *ngIf="fallido" class="alert alert-danger mt-3" role="alert">
+        {{mensaje}}
+    </div>
+
+    <div class="d-flex justify-content-center" style="text-align: center;">
+        <p><b>No hay estudiantes inscritos en este curso</b></p>
+    </div>
+
+    <div *ngIf="estudiantes.length > 0" class="d-flex justify-content-center">
+        <div class=" w-50 p-3">
+            <table mat-table [dataSource]="estudiantes" class="mat-elevation-z8">
+                <ng-container matColumnDef="nombre">
+                    <th mat-header-cell *matHeaderCellDef> Nombre </th>
+                    <td mat-cell *matCellDef="let estudiante"> {{estudiante.nombre | nombrePipe}} </td>
+                </ng-container>
+                <ng-container matColumnDef="apellido">
+                    <th mat-header-cell *matHeaderCellDef> Apellido </th>
+                    <td mat-cell *matCellDef="let estudiante"> {{estudiante.apellido | nombrePipe}} </td>
+                </ng-container>
+                <ng-container matColumnDef="eliminar">
+                    <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Desinscribir </th>
+                    <td mat-cell *matCellDef="let estudiante" style="text-align: center;">
+                        <mat-icon aria-hidden="false" aria-label="close icon" fontIcon="close" color="warn"
+                            (click)="botonDesinscribir(estudiante)"></mat-icon>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="columnasMostradas"></tr>
+                <tr mat-row *matRowDef="let row; columns: columnasMostradas; index as i"></tr>
+            </table>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center mt-3 gap-3">
+        <button type="button" class="btn btn-danger" routerLink="../tabla">
+            Regresar
+        </button>
+        <button type="submit" [disabled]="!formularioCreacion.valid" class="btn btn-success" (click)="editarCurso()">
+            Guardar
+        </button>
+    </div>
+</form>

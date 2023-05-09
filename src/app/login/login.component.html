@@ -1,0 +1,35 @@
+<app-toolbar></app-toolbar>
+<form [formGroup]="formularioLogin" class="mt-5">
+    <div class="d-flex justify-content-center">
+        <div class="mb-3 mt-5 w-50">
+            <label for="exampleFormControlInput1" class="form-label">Usuario</label>
+            <input type="text" class="form-control" formControlName="usuario"
+                [ngClass]="{'is-invalid': formularioLogin.get('usuario')?.invalid && formularioLogin.get('usuario')?.dirty}"
+                required>
+            <div *ngIf="formularioLogin.get('usuario')?.invalid && formularioLogin.get('usuario')?.dirty"
+                class="invalid-feedback">
+                Ingrese su usuario
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center">
+        <div class="mb-3 w-50">
+            <label for="exampleFormControlInput1" class="form-label">Contraseña</label>
+            <input type="password" class="form-control" formControlName="contrasena"
+                [ngClass]="{'is-invalid': formularioLogin.get('contrasena')?.invalid && formularioLogin.get('contrasena')?.dirty}"
+                required>
+            <div *ngIf="formularioLogin.get('contrasena')?.invalid && formularioLogin.get('contrasena')?.dirty"
+                class="invalid-feedback">
+                Ingrese su contraseña
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center gap-3">
+        <button class="btn btn-danger">
+            Salir
+        </button>
+        <button class="btn btn-success" [disabled]="!formularioLogin.valid" (click)="btnIngreso()">
+            Ingresar
+        </button>
+    </div>
+</form>

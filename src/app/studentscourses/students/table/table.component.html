@@ -19,14 +19,6 @@
     <th mat-header-cell *matHeaderCellDef [appFuente]="'20px'"> Correo </th>
     <td mat-cell *matCellDef="let student"> {{student.correo}} </td>
   </ng-container>
-  <ng-container matColumnDef="cursosFinalizados">
-    <th mat-header-cell *matHeaderCellDef [appFuente]="'20px'"> Cursos finalizados </th>
-    <td mat-cell *matCellDef="let student"> {{student.cursosFinalizados|cursoPipe}} </td>
-  </ng-container>
-  <ng-container matColumnDef="cursando">
-    <th mat-header-cell *matHeaderCellDef [appFuente]="'20px'"> Cursando </th>
-    <td mat-cell *matCellDef="let student"> {{student.cursando.curso}} </td>
-  </ng-container>
   <ng-container matColumnDef="editar">
     <th mat-header-cell *matHeaderCellDef [appFuente]="'20px'"> Editar </th>
     <td mat-cell *matCellDef="let student">

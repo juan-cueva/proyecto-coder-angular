@@ -1,0 +1,27 @@
+* {
+    margin: 5px;
+    padding: 5px;
+}
+
+app-toolbar {
+    grid-area: toolbar;
+}
+
+app-navbar {
+    grid-area: navbar;
+}
+
+app-students {
+    grid-area: students;
+}
+
+.main-layout {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-template-rows: auto 3fr;
+    grid-template-areas: 
+    "toolbar toolbar"
+    "navbar students";
+    height: 100vh;
+    gap: 10px;
+}

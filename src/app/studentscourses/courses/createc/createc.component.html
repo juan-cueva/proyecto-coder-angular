@@ -1,0 +1,45 @@
+<form [formGroup]="formularioCreacion">
+    <div class="d-flex justify-content-center">
+        <div class="mb-3 w-50">
+            <label for="exampleFormControlInput1" class="form-label">Nombre del curso</label>
+            <input type="text" class="form-control" formControlName="curso"
+                [ngClass]="{'is-invalid': formularioCreacion.get('curso')?.invalid && formularioCreacion.get('curso')?.dirty}"
+                required>
+            <div *ngIf="formularioCreacion.get('curso')?.invalid && formularioCreacion.get('curso')?.dirty"
+                class="invalid-feedback">
+                {{formularioCreacion.get('curso')?.getError('required') ? 'Ingrese el nombre del curso' : 'Ingrese
+                carácteres válidos [a-z, A-Z]'}}
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center">
+        <div class="mb-3 w-50">
+            <label for="exampleFormControlInput1" class="form-label">Capacidad del curso</label>
+            <input type="number" class="form-control" formControlName="capacidad"
+                [ngClass]="{'is-invalid': formularioCreacion.get('capacidad')?.invalid && formularioCreacion.get('capacidad')?.dirty}"
+                required>
+            <div *ngIf="formularioCreacion.get('capacidad')?.invalid && formularioCreacion.get('capacidad')?.dirty"
+                class="invalid-feedback">
+                {{formularioCreacion.get('capacidad')?.getError('required') ? 'Ingrese la capacidad del curso' :
+                'Ingrese carácteres válidos [a-z, A-Z]'}}
+            </div>
+        </div>
+    </div>
+
+
+    <div *ngIf="exitoso" class="alert alert-success" role="alert">
+        Curso fue creado
+    </div>
+    <div *ngIf="fallido" class="alert alert-danger mt-3" role="alert">
+        Curso no se creó
+    </div>
+    <div class="d-flex justify-content-center mt-3 gap-3">
+        <button type="button" class="btn btn-danger" routerLink="../tabla">
+            Regresar
+        </button>
+        <button type="submit" [disabled]="!formularioCreacion.valid" class="btn btn-success"
+            (click)="crearCurso()">
+            Guardar
+        </button>
+    </div>
+</form>

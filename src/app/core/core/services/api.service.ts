@@ -33,4 +33,16 @@ export class ApiService {
   public deleteEstudiante(id: string) {
     return this.httpClient.delete(this.URL_API + 'estudiantes/' + id);
   }
+
+  public postCurso(body: Curso) {
+    return this.httpClient.post(this.URL_API + 'cursos', body)
+  }
+
+  public putCurso(id: number, body: Curso) {
+    return this.httpClient.put(this.URL_API + 'cursos/' + id, body)
+  }
+
+  public deleteCurso(id: string) {
+    return this.httpClient.delete(this.URL_API + 'cursos/' + id);
+  }
 }

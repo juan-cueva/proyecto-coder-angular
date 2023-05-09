@@ -14,12 +14,14 @@ export class EditComponent implements OnInit {
   formularioCreacion: FormGroup;
   cursos: Curso[] = [];
   activo: boolean = false;
-  cursosFinalizados: Curso[] = [];
+  cursando: Curso[] = [];
   body: any = {};
   exitoso: boolean = false;
   fallido: boolean = false;
   estudianteString: any;
   estudiante: any;
+  bodyCurso: any;
+  cursosDesmarcados: Curso[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -32,6 +34,7 @@ export class EditComponent implements OnInit {
     this.estudiante = this.estudianteString ? JSON.parse(this.estudianteString) : null;
     this.service.getCursos().subscribe((data) => {
       this.cursos = data;
+      this.cursos.filter(x => x.capacidad > 0);
     })
     this.formularioCreacion = this.fb.group({
       nombre: ['', [Validators.pattern('^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+$')]],
@@ -39,47 +42,42 @@ export class EditComponent implements OnInit {
       edad: ['', [Validators.pattern('^[0-9]+$')]],
       correo: ['', [Validators.email]],
       estaActivo: this.estudiante.estaActivo,
-      cursando: ['']
     });
     if (this.estudiante.estaActivo) {
       this.activar();
     }
-    this.cursosFinalizados = this.estudiante.cursosFinalizados;
-    console.log(this.estudiante);
-    
+    this.cursando = this.estudiante.cursando;
   }
   activar() {
     this.activo = this.formularioCreacion.get('estaActivo')?.value;
-    if (this.activo) {
-      this.formularioCreacion.controls['cursando'].setValidators([Validators.required]);
-    } else {
-      this.formularioCreacion.controls['cursando'].clearValidators();
-      this.formularioCreacion.get('cursando')?.setValue('');
-    }
-    this.formularioCreacion.controls['cursando'].updateValueAndValidity();
   }
   guardarCheckbox(event: any, i: number) {
     let curso = this.cursos[i]
     if (event.target.checked) {
-      if (!this.cursosFinalizados.some((x) => x.id === curso.id)) {
-        this.cursosFinalizados.push(curso);
+      if (!this.cursando.some((x) => x.id === curso.id)) {
+        this.cursando.push(curso);
       }
     } else {
-      if (this.cursosFinalizados.some((x) => x.id === curso.id)) {
-        this.cursosFinalizados = this.cursosFinalizados.filter((x) => x.id !== curso.id);
+      if (this.cursando.some((x) => x.id === curso.id)) {
+        this.cursando = this.cursando.filter((x) => x.id !== curso.id);
       }
+      if (!this.cursosDesmarcados.some(x => x.id === curso.id) && this.estudiante.cursando.some((x: Curso) => x.id === curso.id)) {
+        this.cursosDesmarcados.push(curso);
+      } else {
+        this.cursosDesmarcados = this.cursosDesmarcados.filter(x => x.id !== curso.id)
+      }
+      console.log(this.cursosDesmarcados);
+
     }
 
   }
-  mostrarCursosFinalizados(i: number): boolean {
+  mostrarCursando(i: number): boolean {
     let checkboxCurso = this.cursos[i];
     let resultado;
-    for (let i = 0; i < this.estudiante.cursosFinalizados.length; i++) {
-      if (this.estudiante.cursosFinalizados[i].id === checkboxCurso.id) {
+    for (let i = 0; i < this.estudiante.cursando.length; i++) {
+      if (this.estudiante.cursando[i].id === checkboxCurso.id) {
         resultado = true;
-        
         return true;
-
       }
     }
     resultado = false;
@@ -90,22 +88,58 @@ export class EditComponent implements OnInit {
     this.body['id'] = String(this.estudiante.id);
     for (let nombreControl in this.formularioCreacion.controls) {
       let control = this.formularioCreacion.get(nombreControl);
-      if (control?.dirty){
+      if (control?.dirty) {
         this.body[nombreControl] = nombreControl === 'nombre' || nombreControl === 'apellido' ? (this.formularioCreacion.get(nombreControl)?.value).trim().toUpperCase() : this.formularioCreacion.get(nombreControl)?.value;
       } else {
         this.body[nombreControl] = this.estudiante[nombreControl];
       }
     }
-    if(!this.body['estaActivo']) {
+    if (!this.body['estaActivo']) {
       this.body['cursando'] = []
     }
-    this.body['cursosFinalizados'] = this.cursosFinalizados; 
+    this.body['cursando'] = this.cursando;
     this.service.putEstudiante(this.body['id'], this.body).subscribe((data) => {
       this.exitoso = true;
+      for (const curso of this.cursando) {
+        for (let i = 0; i < this.cursos.length; i++) {
+          if (this.cursos[i].id === curso.id) {
+            this.bodyCurso = {
+              id: Number(curso.id),
+              curso: curso.curso,
+              capacidad: curso.capacidad - 1
+            }
+            this.service.putCurso(curso.id, this.bodyCurso).subscribe(
+              data => {
+                this.exitoso = true;
+              }, error => {
+                this.fallido = true;
+              }
+            )
+          }
+        }
+      }
+      console.log(this.cursosDesmarcados.length);
+      if (this.cursosDesmarcados.length > 0) {
+        for (let curso of this.cursosDesmarcados) {
+          this.bodyCurso = {
+            id: Number(curso.id),
+            curso: curso.curso,
+            capacidad: curso.capacidad + 1
+          }
+          this.service.putCurso(curso.id, this.bodyCurso).subscribe(
+            data => {
+              this.exitoso = true;
+            }, error => {
+              this.fallido = true;
+            }
+          )
+        }
+      }
+      this.exitoso = true;
+      setTimeout(() => this.router.navigate(['landing/estudiantes/tabla']), 1500);
     }, (error) => {
       this.fallido = true;
     });
-    setTimeout(() => this.router.navigate(['estudiantes/tabla']), 1500);
   }
 
 }
