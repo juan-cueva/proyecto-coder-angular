@@ -4,11 +4,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from '../layout/layout.component';
 import { RutasHijasModule } from './rutas-hijas.module';
 import { LoginComponent } from '../login/login.component';
+import { AuthGuard } from '../core/auth.guard';
 
 const rutas: Routes = [
   { path: '', redirectTo:'/login', pathMatch: 'full'},
+  { path: '**', redirectTo:'/login'}, 
   { path: 'login', component: LoginComponent},
-  { path: 'landing', component: LayoutComponent},
+  { path: 'landing', component: LayoutComponent}
 ]
 
 @NgModule({

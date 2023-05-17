@@ -1,7 +1,7 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { BsModalService } from 'ngx-bootstrap/modal';
-import { ApiService } from 'src/app/core/core/services/api.service';
+import { ApiService } from 'src/app/core/services/api.service';
 import { Curso } from 'src/app/shared/model/curso';
 
 @Component({

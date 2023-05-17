@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from './navbar.component';
 import { RutasModule } from '../routes/rutas.module';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -9,7 +10,8 @@ import { RutasModule } from '../routes/rutas.module';
   declarations: [NavbarComponent],
   imports: [
     CommonModule,
-    RutasModule
+    RutasModule,
+    SharedModule
   ],
   exports: [
     NavbarComponent,

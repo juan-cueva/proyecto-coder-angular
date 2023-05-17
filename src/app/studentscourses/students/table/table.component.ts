@@ -1,6 +1,6 @@
 import { Component, TemplateRef } from '@angular/core';
 import { Student } from 'src/app/shared/model/student';
-import { ApiService } from 'src/app/core/core/services/api.service';
+import { ApiService } from 'src/app/core/services/api.service';
 import { Router } from '@angular/router';
 import { BsModalService } from 'ngx-bootstrap/modal';
 

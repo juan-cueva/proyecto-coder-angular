@@ -10,6 +10,7 @@ import { StudentscoursesComponent } from '../studentscourses/studentscourses.com
 import { TablecComponent } from '../studentscourses/courses/tablec/tablec.component';
 import { CreatecComponent } from '../studentscourses/courses/createc/createc.component';
 import { EditcComponent } from '../studentscourses/courses/editc/editc.component';
+import { AuthGuard } from '../core/auth.guard';
 
 
 const rutas: Routes = [
@@ -23,13 +24,13 @@ const rutas: Routes = [
         {path: 'tabla', component: TableComponent},
         {path: 'crear', component: CreateComponent},
         {path: 'editar', component: EditComponent}
-      ]},
+      ], canActivateChild: [AuthGuard]},
       {path: 'cursos', component: StudentscoursesComponent, children:[
         {path: '', redirectTo: 'tabla', pathMatch: 'full'},
         {path: 'tabla', component: TablecComponent},
         {path: 'crear', component: CreatecComponent},
         {path: 'editar', component: EditcComponent}
-      ]}      
+      ], canActivateChild: [AuthGuard]}      
 
     ]
   }

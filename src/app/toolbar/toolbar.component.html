@@ -4,3 +4,19 @@
     </a>
     <h1>Plataforma de gestión de estudiantes</h1>
 </div>
+<div class="d-flex justify-content-end">
+    <nav class="navbar navbar-expand">
+        <div class="navbar-collapse">
+          <ul class="navbar-nav mr-auto"></ul>
+          <span class="navbar-brand">
+            {{nombreUsuario | nombrePipe}}
+          </span>
+          <span class="navbar-brand">
+            |
+          </span>
+          <span class="navbar-brand">
+            {{rol}}
+          </span>
+        </div>
+      </nav>
+</div>
