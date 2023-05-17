@@ -33,7 +33,7 @@
         {{mensaje}}
     </div>
 
-    <div class="d-flex justify-content-center" style="text-align: center;">
+    <div *ngIf="" class="d-flex justify-content-center" style="text-align: center;">
         <p><b>No hay estudiantes inscritos en este curso</b></p>
     </div>
 
@@ -64,7 +64,7 @@
         <button type="button" class="btn btn-danger" routerLink="../tabla">
             Regresar
         </button>
-        <button type="submit" [disabled]="!formularioCreacion.valid" class="btn btn-success" (click)="editarCurso()">
+        <button type="submit" class="btn btn-success" (click)="editarCurso()">
             Guardar
         </button>
     </div>

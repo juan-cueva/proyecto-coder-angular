@@ -44,12 +44,17 @@ export class EditComponent implements OnInit {
       estaActivo: this.estudiante.estaActivo,
     });
     if (this.estudiante.estaActivo) {
-      this.activar();
+      this.activo = this.formularioCreacion.get('estaActivo')?.value;
     }
     this.cursando = this.estudiante.cursando;
   }
-  activar() {
-    this.activo = this.formularioCreacion.get('estaActivo')?.value;
+  activar(event: any) {
+    if (!event.target.checked) {
+      this.cursando = [];
+      this.activo = false;
+    } else {
+      this.activo = true;
+    }
   }
   guardarCheckbox(event: any, i: number) {
     let curso = this.cursos[i]

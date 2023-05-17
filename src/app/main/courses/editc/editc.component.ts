@@ -39,8 +39,8 @@ export class EditcComponent implements OnInit{
       }
     )
     this.formularioCreacion = this.fb.group({
-      curso: ['', [Validators.required, Validators.pattern('^[a-zA-ZáéíóúÁÉÍÓÚñÑ_ ]+$')]],
-      capacidad: ['', [Validators.required]]
+      curso: ['', [Validators.pattern('^[a-zA-ZáéíóúÁÉÍÓÚñÑ_ ]+$')]],
+      capacidad: ['']
     });
     this.columnasMostradas = ['nombre', 'apellido', 'eliminar'];
   }
@@ -48,12 +48,14 @@ export class EditcComponent implements OnInit{
   editarCurso() {
     for (let nombreControl in this.formularioCreacion.controls) {
       let control = this.formularioCreacion.get(nombreControl);
+      console.log(this.formularioCreacion.get(nombreControl)?.value);
       if (control?.dirty) {
-        this.body[nombreControl] = nombreControl === 'curso' ? (this.formularioCreacion.get(nombreControl)?.value).trim().toUpperCase() : this.formularioCreacion.get(nombreControl)?.value;
+        this.body[nombreControl] = nombreControl === 'curso' ? this.formularioCreacion.get(nombreControl)?.value.trim().toUpperCase() : this.formularioCreacion.get(nombreControl)?.value;
       } else {
         this.body[nombreControl] = this.curso[nombreControl];
       }    }
-    this.service.postCurso(this.body).subscribe(
+      this.body['id'] = this.curso.id;
+    this.service.putCurso(Number(this.curso.id),this.body).subscribe(
       data=>{
         this.exitoso = true;
         this.mensaje = "Se actualizó el curso"
@@ -73,6 +75,16 @@ export class EditcComponent implements OnInit{
       data=>{
         this.exitoso = true;
         this.mensaje = "Se desinscribió el alumno";
+        this.body['capacidad'] = this.curso.capacidad + 1;
+        this.service.putCurso(Number(this.curso.id),this.body).subscribe(
+          data=>{
+            this.exitoso = true;
+            this.mensaje = "Se actualizó el curso"
+          }, error => {
+            this.fallido = true;
+            this.mensaje = "El curso no pudo se actualizado"
+          }
+        )
         this.ngOnInit();
       }, error => {
         this.fallido = true;

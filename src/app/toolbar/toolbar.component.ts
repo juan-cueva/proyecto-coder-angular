@@ -11,9 +11,7 @@ rol: string;
 estaVerificado: any;
 
   ngOnInit(): void {
-    this.estaVerificado = sessionStorage.getItem('usuarioverificado');
-    console.log(this.estaVerificado);
-      
+    this.estaVerificado = sessionStorage.getItem('usuarioverificado');      
     if( this.estaVerificado){
       this.nombreUsuario = sessionStorage.getItem('nombres');
       if(sessionStorage.getItem('rol') === "1") {

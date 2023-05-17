@@ -2,21 +2,21 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from '../layout/layout.component';
-import { RutasHijasModule } from './rutas-hijas.module';
 import { LoginComponent } from '../login/login.component';
-import { AuthGuard } from '../core/auth.guard';
+import { RutasHijasModule } from './rutas-hijas.module';
 
 const rutas: Routes = [
-  { path: '', redirectTo:'/login', pathMatch: 'full'},
-  { path: '**', redirectTo:'/login'}, 
-  { path: 'login', component: LoginComponent},
-  { path: 'landing', component: LayoutComponent}
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  // { path: '**', redirectTo: '/login' },
+  { path: 'login', component: LoginComponent },
+  { path: 'landing', 
+  loadChildren: () => import('./rutas-hijas.module').then((m) => m.RutasHijasModule) }
 ]
 
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule, RouterModule.forRoot(rutas), RutasHijasModule
+    RouterModule.forRoot(rutas)
   ],
   exports: [
     RouterModule
