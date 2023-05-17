@@ -4,7 +4,7 @@ import { SharedModule } from '../shared/shared.module';
 import { ToolbarModule } from '../toolbar/toolbar.module';
 import { NavbarModule } from '../navbar/navbar.module';
 import { LayoutComponent } from './layout.component';
-import { StudentsCoursesModule } from '../studentscourses/studentscourses.module';
+import { MainModule } from '../main/main.module';
 
 
 
@@ -14,7 +14,7 @@ import { StudentsCoursesModule } from '../studentscourses/studentscourses.module
     CommonModule,
     SharedModule,
     ToolbarModule,
-    StudentsCoursesModule,
+    MainModule,
     NavbarModule
   ],
   exports: [LayoutComponent]

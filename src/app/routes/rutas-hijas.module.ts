@@ -3,14 +3,15 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
 import { LayoutComponent } from '../layout/layout.component';
-import { TableComponent } from '../studentscourses/students/table/table.component';
-import { CreateComponent } from '../studentscourses/students/create/create.component';
-import { EditComponent } from '../studentscourses/students/edit/edit.component';
-import { StudentscoursesComponent } from '../studentscourses/studentscourses.component';
-import { TablecComponent } from '../studentscourses/courses/tablec/tablec.component';
-import { CreatecComponent } from '../studentscourses/courses/createc/createc.component';
-import { EditcComponent } from '../studentscourses/courses/editc/editc.component';
+
 import { AuthGuard } from '../core/auth.guard';
+import { MainComponent } from '../main/main.component';
+import { TableComponent } from '../main/students/table/table.component';
+import { CreateComponent } from '../main/students/create/create.component';
+import { EditComponent } from '../main/students/edit/edit.component';
+import { TablecComponent } from '../main/courses/tablec/tablec.component';
+import { CreatecComponent } from '../main/courses/createc/createc.component';
+import { EditcComponent } from '../main/courses/editc/editc.component';
 
 
 const rutas: Routes = [
@@ -19,13 +20,13 @@ const rutas: Routes = [
     component: LayoutComponent,
     children: [
       {path: '', redirectTo: 'estudiantes', pathMatch: 'full'},
-      {path: 'estudiantes', component: StudentscoursesComponent, children:[
+      {path: 'estudiantes', component: MainComponent, children:[
         {path: '', redirectTo: 'tabla', pathMatch: 'full'},
         {path: 'tabla', component: TableComponent},
         {path: 'crear', component: CreateComponent},
         {path: 'editar', component: EditComponent}
       ], canActivateChild: [AuthGuard]},
-      {path: 'cursos', component: StudentscoursesComponent, children:[
+      {path: 'cursos', component: MainComponent, children:[
         {path: '', redirectTo: 'tabla', pathMatch: 'full'},
         {path: 'tabla', component: TablecComponent},
         {path: 'crear', component: CreatecComponent},

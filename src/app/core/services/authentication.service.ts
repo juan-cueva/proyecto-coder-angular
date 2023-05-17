@@ -33,7 +33,7 @@ export class AuthenticationService {
       );
       setTimeout(() => {
         if (this.usuario !== undefined && this.usuario.id === username && this.usuario.password === password) {
-          sessionStorage.setItem('usuarioVerificado', 'true');
+          sessionStorage.setItem('usuarioverificado', 'true');
           sessionStorage.setItem('nombres', this.usuario.nombres);
           sessionStorage.setItem('rol', String(this.usuario.rol));
           this.usuarioLoggeado = true;
@@ -48,9 +48,7 @@ export class AuthenticationService {
   }
 
   desloggear() {
-    sessionStorage.removeItem('usuarioVerificado');
-    sessionStorage.removeItem('nombres');
-    sessionStorage.removeItem('rol');
+    sessionStorage.clear();
     this.usuarioLoggeado = false;
   }
 

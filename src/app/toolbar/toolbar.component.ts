@@ -8,11 +8,17 @@ import { Component, OnInit } from '@angular/core';
 export class ToolbarComponent implements OnInit{
 nombreUsuario: any;
 rol: string;
+estaVerificado: any;
 
   ngOnInit(): void {
-    this.nombreUsuario = sessionStorage.getItem('nombres');
-    if(sessionStorage.getItem('rol') === "1") {
-      this.rol = "Administrador de aplicación"
+    this.estaVerificado = sessionStorage.getItem('usuarioverificado');
+    console.log(this.estaVerificado);
+      
+    if( this.estaVerificado){
+      this.nombreUsuario = sessionStorage.getItem('nombres');
+      if(sessionStorage.getItem('rol') === "1") {
+        this.rol = "Administrador de aplicación"
+      }
     }
   }
 

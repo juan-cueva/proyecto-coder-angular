@@ -5,22 +5,22 @@ import { RouterModule } from '@angular/router';
 import { CreateComponent } from './students/create/create.component';
 import { EditComponent } from './students/edit/edit.component';
 import { TableComponent } from './students/table/table.component';
-import { StudentscoursesComponent } from './studentscourses.component';
 import { TablecComponent } from './courses/tablec/tablec.component';
 import { CreatecComponent } from './courses/createc/createc.component';
 import { EditcComponent } from './courses/editc/editc.component';
+import { MainComponent } from './main.component';
 
 
 
 @NgModule({
-  declarations: [CreateComponent, EditComponent, TableComponent, StudentscoursesComponent, TablecComponent, CreatecComponent, EditcComponent],
+  declarations: [CreateComponent, EditComponent, TableComponent, MainComponent, TablecComponent, CreatecComponent, EditcComponent],
   imports: [
     CommonModule,
     SharedModule,
     RouterModule
   ],
   exports: [
-    StudentscoursesComponent
+    MainComponent
   ]
 })
-export class StudentsCoursesModule { }
+export class MainModule { }

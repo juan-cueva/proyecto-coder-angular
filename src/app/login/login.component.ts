@@ -12,6 +12,8 @@ export class LoginComponent implements OnInit{
   @Output() loginState = new EventEmitter<boolean>();
   login: boolean = false;
   formularioLogin: FormGroup;
+  mensajeError: string;
+  error: boolean = false; 
 
   constructor(
     private fb: FormBuilder,
@@ -20,26 +22,30 @@ export class LoginComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
+    sessionStorage.clear();
     this.loginState.emit(this.login);
     this.formularioLogin = this.fb.group({
       usuario: ['', [Validators.required]],
       contrasena: ['', [Validators.required]]
     });
     this.auth.desloggear();
+    this.mensajeError = "Usuario o contraseña errados"
 
   }
 
   async btnIngreso(): Promise<void> {
-
     try {
       this.login = await this.auth.verificarLogin(this.formularioLogin.get('usuario')?.value, this.formularioLogin.get('contrasena')?.value);
       if(this.login){
+        this.error = false;
         this.router.navigate(['landing']);
       } else {
-        this.ngOnInit();
+        this.error = true;
+        setTimeout(()=>this.ngOnInit(), 2000)
       }
     } catch (error) {
-      console.log(error);
+      this.error = true;
+      this.mensajeError = String(error);
     }
   }
 }

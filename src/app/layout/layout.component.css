@@ -11,8 +11,8 @@ app-navbar {
     grid-area: navbar;
 }
 
-app-students {
-    grid-area: students;
+app-main {
+    grid-area: main;
 }
 
 .main-layout {
@@ -21,7 +21,7 @@ app-students {
     grid-template-rows: auto 3fr;
     grid-template-areas: 
     "toolbar toolbar"
-    "navbar students";
+    "navbar main";
     height: 100vh;
     gap: 10px;
 }
