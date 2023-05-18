@@ -48,7 +48,6 @@ export class EditcComponent implements OnInit{
   editarCurso() {
     for (let nombreControl in this.formularioCreacion.controls) {
       let control = this.formularioCreacion.get(nombreControl);
-      console.log(this.formularioCreacion.get(nombreControl)?.value);
       if (control?.dirty) {
         this.body[nombreControl] = nombreControl === 'curso' ? this.formularioCreacion.get(nombreControl)?.value.trim().toUpperCase() : this.formularioCreacion.get(nombreControl)?.value;
       } else {
@@ -70,7 +69,6 @@ export class EditcComponent implements OnInit{
   botonDesinscribir(estudiante: Student) {
     this.bodyEstudiante = estudiante;
     this.bodyEstudiante['cursando'] = estudiante.cursando.filter((x)=> x.id !== this.curso.id);
-    console.log(this.bodyEstudiante);
     this.service.putEstudiante(String(estudiante.id), this.bodyEstudiante).subscribe(
       data=>{
         this.exitoso = true;

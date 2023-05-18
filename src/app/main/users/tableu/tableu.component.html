@@ -1,1 +1,46 @@
-<p>tableu works!</p>
+<table mat-table [dataSource]="usuarios" class="mat-elevation-z8">
+    <ng-container matColumnDef="nombre">
+      <th mat-header-cell *matHeaderCellDef [appFuente]="'20px'"> Nombre </th>
+      <td mat-cell *matCellDef="let usuario"> {{usuario.nombres | nombrePipe}} </td>
+    </ng-container>
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef [appFuente]="'20px'"> Username </th>
+      <td mat-cell *matCellDef="let usuario"> {{usuario.username}} </td>
+    </ng-container>
+    <ng-container matColumnDef="rol">
+      <th mat-header-cell *matHeaderCellDef [appFuente]="'20px'"> Rol </th>
+      <td mat-cell *matCellDef="let usuario"> {{usuario.rol === 1 ? 'Administrador': 'Usuario'}} </td>
+    </ng-container>
+    <ng-container matColumnDef="editar">
+      <th mat-header-cell *matHeaderCellDef [appFuente]="'20px'"> Editar </th>
+      <td mat-cell *matCellDef="let usuario">
+        <mat-icon aria-hidden="false" aria-label="edit icon" fontIcon="edit" color="primary" (click)="botonEditar(usuario)"></mat-icon>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="eliminar">
+      <th mat-header-cell *matHeaderCellDef [appFuente]="'20px'"> Eliminar </th>
+      <td mat-cell *matCellDef="let usuario">
+        <mat-icon aria-hidden="false" aria-label="delete icon" fontIcon="delete" color="warn" (click)="mostrarModal(modalEliminar, usuario)"></mat-icon>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="columnasMostradas"></tr>
+    <tr mat-row *matRowDef="let row; columns: columnasMostradas; index as i"
+    [ngClass]="usuarios[i].activo ? '': 'inactivo'"></tr>
+  </table>
+  
+  <ng-template #modalEliminar>
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">¿Esta seguro de eliminar al/la estudiante?</h1>
+          </div>
+          <div class="modal-body">
+            Se eliminará a {{usuarioSeleccionado.nombres | nombrePipe}} del sistema.
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary"(click)="cerrarModal()">Cerrar</button>
+            <button type="button" class="btn btn-danger" (click)="eliminarUsuario()">Eliminar</button>
+          </div>
+  </ng-template>
+  
+  <div class="d-flex justify-content-center mt-3">
+    <button type="button" class="btn btn-primary" routerLink="../crear">Crear usuario</button>
+  </div>

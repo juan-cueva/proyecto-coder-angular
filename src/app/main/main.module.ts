@@ -16,7 +16,7 @@ import { EdituComponent } from './users/editu/editu.component';
 
 
 @NgModule({
-  declarations: [CreateComponent, EditComponent, TableComponent, MainComponent, TablecComponent, CreatecComponent, EditcComponent, TableuComponent, CreateuComponent, EdituComponent, ],
+  declarations: [CreateComponent, EditComponent, TableComponent, MainComponent, TablecComponent, CreatecComponent, EditcComponent, TableuComponent, CreateuComponent, EdituComponent],
   imports: [
     CommonModule,
     SharedModule,

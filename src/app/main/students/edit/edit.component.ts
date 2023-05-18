@@ -71,8 +71,6 @@ export class EditComponent implements OnInit {
       } else {
         this.cursosDesmarcados = this.cursosDesmarcados.filter(x => x.id !== curso.id)
       }
-      console.log(this.cursosDesmarcados);
-
     }
 
   }
@@ -123,7 +121,6 @@ export class EditComponent implements OnInit {
           }
         }
       }
-      console.log(this.cursosDesmarcados.length);
       if (this.cursosDesmarcados.length > 0) {
         for (let curso of this.cursosDesmarcados) {
           this.bodyCurso = {

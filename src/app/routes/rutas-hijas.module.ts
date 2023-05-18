@@ -11,6 +11,9 @@ import { TablecComponent } from '../main/courses/tablec/tablec.component';
 import { CreatecComponent } from '../main/courses/createc/createc.component';
 import { EditcComponent } from '../main/courses/editc/editc.component';
 import { LayoutComponent } from '../layout/layout.component';
+import { TableuComponent } from '../main/users/tableu/tableu.component';
+import { CreateuComponent } from '../main/users/createu/createu.component';
+import { EdituComponent } from '../main/users/editu/editu.component';
 
 
 const rutas: Routes = [
@@ -38,6 +41,17 @@ const rutas: Routes = [
           { path: 'tabla', component: TablecComponent },
           { path: 'crear', component: CreatecComponent },
           { path: 'editar', component: EditcComponent }
+        ],
+        canActivateChild: [AuthGuard]
+      },
+      {
+        path: 'usuarios',
+        component: MainComponent,
+        children: [
+          { path: '', redirectTo: 'tablau', pathMatch: 'full' },
+          { path: 'tabla', component: TableuComponent },
+          { path: 'crear', component: CreateuComponent },
+          { path: 'editar', component: EdituComponent }
         ],
         canActivateChild: [AuthGuard]
       }

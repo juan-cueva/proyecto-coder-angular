@@ -1,1 +1,75 @@
-<p>editu works!</p>
+<form [formGroup]="formularioCreacion">
+    <div class="d-flex justify-content-center">
+        <div class="mb-3 w-50">
+            <label for="exampleFormControlInput1" class="form-label">Nombres</label>
+            <input type="text" class="form-control" formControlName="nombres"
+                [ngClass]="{'is-invalid': formularioCreacion.get('nombres')?.invalid && formularioCreacion.get('nombres')?.dirty}" [placeholder]="usuario.nombres | nombrePipe">
+            <div *ngIf="formularioCreacion.get('nombres')?.invalid && formularioCreacion.get('nombres')?.dirty"
+                class="invalid-feedback">
+                {{formularioCreacion.get('nombres')?.getError('required') ? 'Ingrese nombre y apellido del usuario' :
+                'Ingrese
+                carácteres válidos [a-z, A-Z]'}}
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center">
+        <div class="mb-3 w-50">
+            <label for="exampleFormControlInput1" class="form-label">Username</label>
+            <input type="text" class="form-control" formControlName="username"
+                [ngClass]="{'is-invalid': formularioCreacion.get('username')?.invalid && formularioCreacion.get('username')?.dirty}" [placeholder]="usuario.username">
+            <div *ngIf="formularioCreacion.get('username')?.invalid && formularioCreacion.get('username')?.dirty"
+                class="invalid-feedback">
+                {{formularioCreacion.get('username')?.getError('required') ? 'Ingrese el username del usuario' :
+                'Ingrese
+                carácteres válidos [a-z, A-Z]'}}
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center">
+        <div class="mb-3 w-50">
+            <label for="exampleFormControlInput1" class="form-label">Password</label>
+            <input type="text" class="form-control" formControlName="password"
+                [ngClass]="{'is-invalid': formularioCreacion.get('password')?.invalid && formularioCreacion.get('password')?.dirty}" [placeholder]="usuario.password">
+            <div *ngIf="formularioCreacion.get('password')?.invalid && formularioCreacion.get('password')?.dirty"
+                class="invalid-feedback">
+                {{formularioCreacion.get('password')?.getError('required') ? 'Ingrese el password del usuario' :
+                'Ingrese carácteres válidos [a-z, A-Z]'}}
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-center">
+        <div class="mb-3 w-50">
+            <label class="form-label">Rol</label>
+            <select class="form-select" formControlName="rol"
+                [ngClass]="{'is-invalid': formularioCreacion.get('rol')?.invalid && formularioCreacion.get('rol')?.touched}">
+                <option value = "" hidden>{{roles[usuario.rol].rol}}</option>
+                <option *ngFor="let rol of roles" [ngValue]="rol.id">{{rol.rol}}</option>
+            </select>
+            <div *ngIf="formularioCreacion.get('rol')?.invalid && formularioCreacion.get('rol')?.touched"
+                class="invalid-feedback">
+                Seleccione un curso de la lista
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center">
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" role="switch"  formControlName="activo">
+            <label class="form-check-label" for="flexSwitchCheckDefault">Activo</label>
+        </div>
+    </div>
+    <div *ngIf="exitoso" class="alert alert-success mt-3" role="alert">
+        Información actualizada exitosamente
+    </div>
+    <div *ngIf="fallido" class="alert alert-danger mt-3" role="alert">
+        Información no pudo ser actualizada
+    </div>
+    <div class="d-flex justify-content-center mt-3 gap-3">
+        <button type="button" class="btn btn-danger" routerLink="../tabla">
+            Regresar
+        </button>
+        <button type="submit" [disabled]="!formularioCreacion.valid" class="btn btn-success" (click)="editarUsuario()">
+            Guardar
+        </button>
+    </div>
+</form>

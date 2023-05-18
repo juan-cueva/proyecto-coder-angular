@@ -37,7 +37,6 @@ estudianteSeleccionado: Student;
   botonEliminar(id: string) {
     this.servicio.deleteEstudiante(id).subscribe(
       data=> {
-        console.log(data);
         this.ngOnInit();
       }
     )

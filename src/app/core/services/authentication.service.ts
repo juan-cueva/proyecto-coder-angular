@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from 'src/app/shared/model/user';
@@ -18,21 +18,19 @@ export class AuthenticationService {
     this.usuarioLoggeado = estaLoggeado;
   }
 
-  public getUsuario(username: string): Observable<User[]> {
-    return this.httpClient.get<User[]>(this.URL_AUTHENTICATION + 'usuarios/' + username)
-  }
-
   public verificarLogin(username: string, password: string) {
     return new Promise<boolean>((resolve, reject) => {
-      this.httpClient.get<User>(this.URL_AUTHENTICATION + 'usuarios/' + username).subscribe(
+      const params = new HttpParams().set('username', username);     
+       this.httpClient.get<User>(this.URL_AUTHENTICATION + 'usuarios/', {params}).subscribe(
         data => {
-          this.usuario = data;
+          let user: any = data;
+          this.usuario = user[0];
         }, error => {
           reject(error)
         }
       );
       setTimeout(() => {
-        if (this.usuario !== undefined && this.usuario.id === username && this.usuario.password === password) {
+        if (this.usuario !== undefined && this.usuario.username === username && this.usuario.password === password) {
           sessionStorage.setItem('usuarioverificado', 'true');
           sessionStorage.setItem('nombres', this.usuario.nombres);
           sessionStorage.setItem('rol', String(this.usuario.rol));
