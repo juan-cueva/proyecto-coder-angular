@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthGuard } from './auth.guard';
+import { AdminGuard } from './admin.guard';
 
 
 
@@ -12,7 +13,8 @@ import { AuthGuard } from './auth.guard';
     HttpClientModule
   ],
   providers: [
-    AuthGuard
+    AuthGuard,
+    AdminGuard
   ]
 })
 export class CoreModule { }

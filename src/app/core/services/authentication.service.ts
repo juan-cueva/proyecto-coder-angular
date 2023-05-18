@@ -25,12 +25,13 @@ export class AuthenticationService {
         data => {
           let user: any = data;
           this.usuario = user[0];
+          sessionStorage.setItem('usuarioactual', JSON.stringify(this.usuario));
         }, error => {
           reject(error)
         }
       );
       setTimeout(() => {
-        if (this.usuario !== undefined && this.usuario.username === username && this.usuario.password === password) {
+        if (this.usuario !== undefined && this.usuario.username === username && this.usuario.password === password && this.usuario.activo) {
           sessionStorage.setItem('usuarioverificado', 'true');
           sessionStorage.setItem('nombres', this.usuario.nombres);
           sessionStorage.setItem('rol', String(this.usuario.rol));

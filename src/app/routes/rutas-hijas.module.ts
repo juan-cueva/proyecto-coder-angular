@@ -14,6 +14,7 @@ import { LayoutComponent } from '../layout/layout.component';
 import { TableuComponent } from '../main/users/tableu/tableu.component';
 import { CreateuComponent } from '../main/users/createu/createu.component';
 import { EdituComponent } from '../main/users/editu/editu.component';
+import { AdminGuard } from '../core/admin.guard';
 
 
 const rutas: Routes = [
@@ -53,7 +54,7 @@ const rutas: Routes = [
           { path: 'crear', component: CreateuComponent },
           { path: 'editar', component: EdituComponent }
         ],
-        canActivateChild: [AuthGuard]
+        canActivateChild: [AuthGuard, AdminGuard]
       }
     ]
   }

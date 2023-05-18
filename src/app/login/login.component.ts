@@ -9,7 +9,6 @@ import { AuthenticationService } from '../core/services/authentication.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit{
-  @Output() loginState = new EventEmitter<boolean>();
   login: boolean = false;
   formularioLogin: FormGroup;
   mensajeError: string;
@@ -23,13 +22,12 @@ export class LoginComponent implements OnInit{
 
   ngOnInit(): void {
     sessionStorage.clear();
-    this.loginState.emit(this.login);
     this.formularioLogin = this.fb.group({
       usuario: ['', [Validators.required]],
       contrasena: ['', [Validators.required]]
     });
     this.auth.desloggear();
-    this.mensajeError = "Usuario o contraseña errados"
+    this.mensajeError = "El Usuario o contraseña errada / Usuario esta inactivo "
 
   }
 
