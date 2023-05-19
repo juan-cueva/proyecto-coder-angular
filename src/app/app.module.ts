@@ -10,6 +10,8 @@ import { SharedModule } from './shared/shared.module';
 import { LayoutModule } from './layout/layout.module';
 import { LoginModule } from './login/login.module';
 import { CoreModule } from './core/core.module';
+import { StoreModule } from '@ngrx/store';
+import { appReducer } from './store/app.reducer';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,8 @@ import { CoreModule } from './core/core.module';
     CoreModule,
     SharedModule,
     LoginModule,
-    LayoutModule
+    LayoutModule,
+    StoreModule.forRoot(appReducer, {})
   ],
   providers: [BsModalService],
   bootstrap: [AppComponent]

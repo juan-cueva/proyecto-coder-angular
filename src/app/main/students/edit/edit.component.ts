@@ -3,6 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Curso } from 'src/app/shared/model/curso';
 import { ApiService } from 'src/app/core/services/api.service';
+import { Store } from '@ngrx/store';
+import { Student } from 'src/app/shared/model/student';
+import { selectStudentState } from 'src/app/store/student/student.selector';
 
 @Component({
   selector: 'app-edit',
@@ -27,11 +30,14 @@ export class EditComponent implements OnInit {
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private service: ApiService,
-    private router: Router) { }
+    private router: Router,
+    private readonly store: Store<any>
+    ) { 
+      this.store.select(selectStudentState)
+      .subscribe((student)=>this.estudiante = student)
+    }
 
   ngOnInit(): void {
-    this.estudianteString = this.route.snapshot.queryParamMap.get('estudiante');
-    this.estudiante = this.estudianteString ? JSON.parse(this.estudianteString) : null;
     this.service.getCursos().subscribe((data) => {
       this.cursos = data;
       this.cursos.filter(x => x.capacidad > 0);

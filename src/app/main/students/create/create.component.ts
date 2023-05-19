@@ -58,7 +58,7 @@ export class CreateComponent implements OnInit {
   }
   crearEstudiante() {
     this.body = {
-      id: Number(sessionStorage.getItem('id')),
+      id: 0,
       nombre: (this.formularioCreacion.get('nombre')?.value).trim().toUpperCase(),
       apellido: (this.formularioCreacion.get('apellido')?.value).trim().toUpperCase(),
       edad: this.formularioCreacion.get('edad')?.value,
